@@ -5,4 +5,8 @@
     <string name="postcode">Postcode</string>
     <string name="submit">Predict</string>
     <string name="error_no_postcode">I could not find that postcode, please try a different one</string>
+    <string name="error_network">I could not access the internet, try again later</string>
+    <string name="error_unknown">Something went wrong and I have no idea what</string>
+    <string name="error_impossible">You shouldn\'t be able to see this error</string>
+    <string name="postcode_error_message">Can\'t find that</string>
 </resources>

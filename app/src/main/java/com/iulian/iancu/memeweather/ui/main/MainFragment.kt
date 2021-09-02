@@ -60,12 +60,29 @@ class MainFragment : Fragment() {
     private fun onStateChange(state: State?) {
         if (state == null) return
         when (val error = state.error) {
+            Error.Impossible -> {
+                binding.mainText.setText(R.string.error_impossible)
+                binding.postcodeInput.error = null
+                Glide.with(this).load(error.meme).into(binding.topImage)
+            }
+            Error.Network -> {
+                binding.mainText.setText(R.string.error_network)
+                binding.postcodeInput.error = null
+                Glide.with(this).load(error.meme).into(binding.topImage)
+            }
+            Error.Unknown -> {
+                binding.mainText.setText(R.string.error_unknown)
+                binding.postcodeInput.error = null
+                Glide.with(this).load(error.meme).into(binding.topImage)
+            }
             Error.Geocoder -> {
                 binding.mainText.setText(R.string.error_no_postcode)
+                binding.postcodeInput.error = getString(R.string.postcode_error_message)
                 Glide.with(this).load(error.meme).into(binding.topImage)
             }
             null -> {
                 binding.mainText.setText(R.string.intro_spiel)
+                binding.postcodeInput.error = null
                 Glide.with(this).load(HELLO_GIF).into(binding.topImage)
             }
         }

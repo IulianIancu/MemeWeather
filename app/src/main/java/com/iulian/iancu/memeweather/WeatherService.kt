@@ -12,7 +12,7 @@ interface WeatherService {
     @GET("onecall")
     suspend fun getWeatherForLocation(
         @Query("lat") lat: Double,
-        @Query("long") long: Double,
+        @Query("lon") lon: Double,
         @Query("appid") appid: String = API_KEY,
         @Query("units") units: String = "metric",
         @Query("exclude") exclude: String = "alerts",

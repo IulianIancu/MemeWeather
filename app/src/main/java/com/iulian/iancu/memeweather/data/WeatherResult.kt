@@ -87,7 +87,7 @@ data class Daily(
     val rain: Double,
     @Expose
     @SerializedName("uvi")
-    var uvi: Int
+    var uvi: Double
 )
 
 data class Weather(
