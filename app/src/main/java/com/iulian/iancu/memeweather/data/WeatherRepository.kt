@@ -4,6 +4,6 @@ import com.iulian.iancu.memeweather.WeatherService
 
 class WeatherRepository constructor(private val retrofitService: WeatherService) {
 
-    suspend fun getAllMovies(lat: Double, long: Double) =
+    suspend fun getAllWeather(lat: Double, long: Double) =
         retrofitService.getWeatherForLocation(lat, long)
 }

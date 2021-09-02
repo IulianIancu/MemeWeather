@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MemeWeather</string>
+    <string name="hello_friend">Hello Friend</string>
+    <string name="intro_spiel">I am an advanced AI that can predict the weather, give me a postcode and I can tell you your future</string>
+    <string name="postcode">Postcode</string>
+    <string name="submit">Predict</string>
+    <string name="error_no_postcode">I could not find that postcode, please try a different one</string>
 </resources>
