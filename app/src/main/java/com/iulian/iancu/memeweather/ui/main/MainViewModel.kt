@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.iulian.iancu.memeweather.IMPOSSIBLE_ERROR_GIF
 import com.iulian.iancu.memeweather.LOST_GIF
 import com.iulian.iancu.memeweather.NO_CONNECTION_GIF
-import com.iulian.iancu.memeweather.UNKOWN_ERROR_GIF
+import com.iulian.iancu.memeweather.UNKNOWN_ERROR_GIF
 import com.iulian.iancu.memeweather.data.WeatherRepository
 import com.iulian.iancu.memeweather.data.WeatherResult
 import kotlinx.coroutines.*
@@ -22,7 +22,7 @@ class MainViewModel constructor(
 
     private var job: Job? = null
 
-    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+    private val exceptionHandler = CoroutineExceptionHandler { _, _ ->
         _state.postValue(_state.value?.copy(error = Error.Unknown))
     }
 
@@ -68,6 +68,6 @@ data class State(
 sealed class Error(val meme: String) {
     object Geocoder : Error(LOST_GIF)
     object Network : Error(NO_CONNECTION_GIF)
-    object Unknown : Error(UNKOWN_ERROR_GIF)
+    object Unknown : Error(UNKNOWN_ERROR_GIF)
     object Impossible : Error(IMPOSSIBLE_ERROR_GIF)
 }

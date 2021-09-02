@@ -9,4 +9,7 @@
     <string name="error_unknown">Something went wrong and I have no idea what</string>
     <string name="error_impossible">You shouldn\'t be able to see this error</string>
     <string name="postcode_error_message">Can\'t find that</string>
+    <string name="current">Current</string>
+    <string name="next_24_hours">Next 24 hours</string>
+    <string name="next_7_days">Next 7 days</string>
 </resources>
