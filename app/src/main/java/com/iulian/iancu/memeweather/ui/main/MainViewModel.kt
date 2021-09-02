@@ -15,8 +15,11 @@ class MainViewModel constructor(
     private val _state = MutableLiveData(State(null))
     val state: LiveData<State> get() = _state
 
-    // TODO: Implement the ViewModel
     fun findWeather(postcode: String) {
+        if (postcode.isBlank()) {
+            _state.postValue(_state.value?.copy(error = Error.Geocoder))
+            return
+        }
         val addresses: List<Address> = geocoder.getFromLocationName(postcode, 1)
         if (addresses.isNotEmpty()) {
             _state.postValue(_state.value?.copy(error = null))
