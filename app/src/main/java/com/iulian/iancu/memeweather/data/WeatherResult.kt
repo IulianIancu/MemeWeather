@@ -33,7 +33,7 @@ data class WeatherResult(
 data class Daily(
     @Expose
     @SerializedName("dt")
-    var dt: Int,
+    var dt: Long,
     @Expose
     @SerializedName("sunrise")
     var sunrise: Int,
@@ -144,7 +144,7 @@ data class Temp(
 data class Hourly(
     @Expose
     @SerializedName("dt")
-    var dt: Int,
+    var dt: Long,
     @Expose
     @SerializedName("temp")
     val temp: Double,
@@ -198,7 +198,7 @@ data class Minutely(
 data class Current(
     @Expose
     @SerializedName("dt")
-    var dt: Int,
+    var dt: Long,
     @Expose
     @SerializedName("sunrise")
     var sunrise: Int,

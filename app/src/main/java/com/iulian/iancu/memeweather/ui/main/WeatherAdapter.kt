@@ -4,8 +4,11 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.iulian.iancu.memeweather.data.WeatherResult
 import com.iulian.iancu.memeweather.databinding.WeatherItemBinding
+import com.iulian.iancu.memeweather.getFormattedDateFromUTC
+import com.iulian.iancu.memeweather.getWatherIconFromCode
 
 @SuppressLint("NotifyDataSetChanged")
 class WeatherAdapter : RecyclerView.Adapter<WeatherViewHolder>() {
@@ -30,9 +33,59 @@ class WeatherAdapter : RecyclerView.Adapter<WeatherViewHolder>() {
 
     override fun onBindViewHolder(holder: WeatherViewHolder, position: Int) {
         when (mode) {
-            Mode.Current -> TODO()
-            Mode.Daily -> TODO()
-            Mode.Weekly -> TODO()
+            Mode.Current -> {
+                holder.binding.apply {
+                    weatherResult?.current?.temp?.let {
+                        weatherDescription.text = "Temperature is $it °C"
+                    }
+                    weatherResult?.current?.dt?.let {
+                        weatherSubtext.text = getFormattedDateFromUTC(it)
+                    }
+
+                    val weather = weatherResult?.current?.weather?.getOrNull(0)
+                    if (weather != null) {
+                        weatherTitle.text = weather.description
+                        Glide.with(this.weatherImage).load(getWatherIconFromCode(weather.id))
+                            .into(weatherImage)
+                    }
+                }
+            }
+            Mode.Daily -> {
+                holder.binding.apply {
+                    val data = weatherResult?.hourly?.get(position)
+                    data?.temp?.let {
+                        weatherDescription.text = "Temperature is $it °C"
+                    }
+                    data?.dt?.let {
+                        weatherSubtext.text = getFormattedDateFromUTC(it)
+                    }
+
+                    val weather = data?.weather?.getOrNull(0)
+                    if (weather != null) {
+                        weatherTitle.text = weather.description
+                        Glide.with(this.weatherImage).load(getWatherIconFromCode(weather.id))
+                            .into(weatherImage)
+                    }
+                }
+            }
+            Mode.Weekly -> {
+                holder.binding.apply {
+                    val data = weatherResult?.daily?.get(position)
+                    data?.temp?.let {
+                        weatherDescription.text = "Temperature is ${it.day} °C"
+                    }
+                    data?.dt?.let {
+                        weatherSubtext.text = getFormattedDateFromUTC(it)
+                    }
+
+                    val weather = data?.weather?.getOrNull(0)
+                    if (weather != null) {
+                        weatherTitle.text = weather.description
+                        Glide.with(this.weatherImage).load(getWatherIconFromCode(weather.id))
+                            .into(weatherImage)
+                    }
+                }
+            }
         }
     }
 

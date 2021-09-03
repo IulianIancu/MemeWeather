@@ -97,18 +97,22 @@
         tools:visibility="visible">
 
         <RadioButton
+            android:id="@+id/mode_current"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_medium"
+            android:checked="true"
             android:text="@string/current" />
 
         <RadioButton
+            android:id="@+id/mode_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_medium"
             android:text="@string/next_24_hours" />
 
         <RadioButton
+            android:id="@+id/mode_week"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_medium"

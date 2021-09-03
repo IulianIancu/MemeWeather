@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.iulian.iancu.memeweather.HELLO_GIF
 import com.iulian.iancu.memeweather.MainViewModelFactory
@@ -25,6 +27,8 @@ class MainFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var viewModel: MainViewModel
+
+    private val adapter = WeatherAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,6 +54,13 @@ class MainFragment : Fragment() {
             MainViewModelFactory(weatherRepository, geocoder)
         ).get(MainViewModel::class.java)
         viewModel.state.observe(viewLifecycleOwner, ::onStateChange)
+
+        binding.weatherRecycler.adapter = adapter
+        binding.weatherRecycler.layoutManager = LinearLayoutManager(context)
+
+        binding.modeCurrent.setOnClickListener { adapter.setMode(Mode.Current) }
+        binding.modeDay.setOnClickListener { adapter.setMode(Mode.Daily) }
+        binding.modeWeek.setOnClickListener { adapter.setMode(Mode.Weekly) }
 
         Glide.with(this).load(HELLO_GIF).into(binding.topImage)
         binding.submit.setOnClickListener {
@@ -85,6 +96,20 @@ class MainFragment : Fragment() {
                 binding.postcodeInput.error = null
                 Glide.with(this).load(HELLO_GIF).into(binding.topImage)
             }
+        }
+
+        if (state.weather != null) {
+            adapter.setWeatherData(state.weather)
+            binding.modeCurrent.performClick()
+            binding.submit.isVisible = false
+            binding.postcodeWrapper.isVisible = false
+            binding.radioGroup.isVisible = true
+            binding.weatherRecycler.isVisible = true
+        } else {
+            binding.submit.isVisible = true
+            binding.postcodeWrapper.isVisible = true
+            binding.radioGroup.isVisible = false
+            binding.weatherRecycler.isVisible = false
         }
     }
 
